@@ -1,52 +1,37 @@
-# AdaptTron
+📌 Strategy Breakdown
+Data Preprocessing
 
-AdaptTron is an advanced, AI-driven trading bot that revolutionizes algorithmic trading by combining multiple cutting-edge techniques. It integrates noise filtering, deep feature extraction, sophisticated pattern recognition, meta-learning for dynamic adaptation, and automated trading strategy execution—all in one unified system.
+Indicators: Open/Close Prices, Bullish/Bearish Signals (e.g., RSI, MACD, EMA)
+Feature Engineering: Additional indicators like Moving Averages (SMA, EMA), Bollinger Bands, RSI, MACD, etc.
+Normalization/Scaling: MinMax or StandardScaler for features.
+Models for Price Prediction:
 
----
+LSTM: For sequential prediction using historical prices.
+CNN-LSTM: To capture both short-term features (CNN) and long-term trends (LSTM).
+Transformer: Apply self-attention to model dependencies across longer timeframes.
+ARIMA: Baseline for time series forecasting (stationary data).
+XGBoost: For boosting decision trees, combining multiple features (indicators, OHLC).
+Reinforcement Learning (Algo Trading)
 
-## Overview
+DQN: Used to estimate Q-values for choosing optimal actions (buy, sell, hold).
+PPO: A more stable reinforcement learning technique for policy optimization.
+Ensemble Strategy:
 
-**AdaptTron** leverages a hybrid architecture that combines:
+Prediction Fusion: Combine predictions from all models (LSTM, CNN-LSTM, Transformer, ARIMA, XGBoost) using a weighted average.
+Final Trading Signal: Use DQN or PPO to decide on trading actions (Buy, Sell, Hold) based on price predictions and historical signals.
+📌 Model Training Process:
+Data Loading:
 
-- **Noise Filtering:**  
-  - *Wavelet Transform*  
-  - *Entropy Analysis*  
+Load different timeframes from your dataset.
+Prepare time-series data with sliding windows for LSTM, CNN-LSTM, and Transformer.
+Model Training:
 
-- **Feature Extraction:**  
-  - *Long Short-Term Memory (LSTM)*  
-  - *Convolutional Neural Networks (CNN)*  
-  - *Gaussian Mixture Models (GMM)*  
+Train each model separately for price prediction.
+Tune hyperparameters using cross-validation (for XGBoost and ARIMA).
+Reinforcement Learning:
 
-- **Pattern Recognition:**  
-  - *Transformer Architectures*  
-  - *Autoencoders*  
-  - *Reinforcement Learning*  
+Train the DQN and PPO with simulated trading environments using historical data.
+Integrate price predictions as part of the environment state for RL models.
+Backtesting:
 
-- **Meta-Learning for Dynamic Adaptation:**  
-  - *Model-Agnostic Meta-Learning (MAML)*  
-  - *Bayesian Optimization*  
-
-- **Trading Strategy Execution:**  
-  - Automated trade execution and risk management in real-time
-
----
-
-## Architecture
-
-AdaptTron's architecture is designed in five key stages:
-
-1. **Noise Filtering:**  
-   Preprocess market data by removing irrelevant noise using wavelet, FFT, and entropy measures, ensuring the subsequent modules work with cleaner signals.
-
-2. **Feature Extraction:**  
-   Extract robust features from the preprocessed data using deep learning (LSTM and CNN) and statistical models (GMM) to capture both temporal and spatial dependencies.
-
-3. **Pattern Recognition:**  
-   Detect complex market patterns and trends using transformer models, autoencoders for dimensionality reduction, and reinforcement learning for adaptive decision-making.
-
-4. **Meta-Learning Adaptation:**  
-   Dynamically adapt to evolving market conditions with meta-learning frameworks like MAML, supported by Bayesian optimization to fine-tune hyperparameters on the fly.
-
-5. **Trading Strategy Execution:**  
-   Execute the optimal trading strategy in real time based on the insights derived from the earlier stages, ensuring robust risk management and portfolio optimization.
-
+Use Backtrader/Zipline to simulate the performance of the ensemble strategy.
