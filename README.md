@@ -10,7 +10,6 @@ AdaptTron is an advanced, AI-driven trading bot that revolutionizes algorithmic 
 
 - **Noise Filtering:**  
   - *Wavelet Transform*  
-  - *Fast Fourier Transform (FFT)*  
   - *Entropy Analysis*  
 
 - **Feature Extraction:**  
